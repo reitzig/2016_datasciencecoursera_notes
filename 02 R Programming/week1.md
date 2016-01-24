@@ -69,13 +69,212 @@ then everything else.
 Find all the stuff on CRAN (4000+ packages) and bioconductor.org.
 More things exist off these platforms.
 
-## R Basics
+
+
+## R Basics: Data types
 
  * There are five atomic classes: 
-   `character`, `numeric` (real numbers), `integer`, `complex` and `logical` (boolean).
+   `character` (strings), `numeric` (real numbers), `integer`, `complex` and `logical` (boolean).
  * Next most basic object: `vector` of things of the same class.
  * `list` is like a vector, but can contain objects of different classes.
  * `1` --> `numeric`; `1L` --> `integer`
  * Special numbers are `Inf`, `-Inf`, `NaN` (not a number; missing values).
  * Objects can *have attributes* such as names, dimensions, class, length, ...
-   Access via `attributes()`.
+   Access list via `attributes()`, attributes by `attr(o, "name")`.
+ * `class(o)` returns the class of `o` (as string).
+ * Objects can have *names*. Access with `names(o)`. Use to have self-describing data!
+
+    For atomic values, use `names(o) <- "name"`.
+
+### Vectors
+
+ * Create with `c(a,b,c,...)`.
+ * Only one type; if you mix types objects are *coerced* to a "least common denominator" type.
+ * `as.<type>(x)` converts `x` to `<type>` (a basic type).
+    If a value can not be coerced, you get `NA`s.
+ * Scalar functions apply to vectors in element-wise fashion.
+ * Arithmetic operators/relations are overloaded to work in element-wise fashion as well.
+    These vectorize, i.e. can be evaluated in parallel.
+ * Assign names by `names(x) <- c("name1", ...)`.
+    
+### Lists
+
+ * Create with `list(a,b,c,...)`.
+ * Similar to vectors but can contain elements of different classes.
+ * Note how `l[1]` (type `list`) is not the same as `l[[1]]` (type of the element)!
+
+    However, `l[1]+` seem all to be the same, but other `l[1][0]` is `list()` and
+    `l[1][i]` is `NULL` for `i>1`. Huh.
+
+    *Note to self:* look up what lists *actually* are, and how they are represented.
+    They are quite clearly not "just like vectors".
+ * Assign names by using named parameters in `list` call, e.g. `list(a = 1, b = 2)`.
+
+### Matrices
+
+ * Vectors with `dimension` attribute `dim(m)`, a vector of integers: number of rows, number of columns.
+ * Create with `matrix(nrow = m, ncol = n)`.
+ * *Recall:* can get list of attributes with `attributes(o)`.
+ * **Important:** Matrices are created *column-wise*. (Try out `m <- matrix(1:6, nrow=2, ncol=3)`.
+ * By (re)setting `dim(m) <- c(a,b)` you can change the shape of a matrix!
+
+   *Note to self:* How is that implemented? Are matrixes just flat arrays --
+   then how on earth are operations on matrices supposed to be efficient?
+   Or do they re-allocate the whole thing when you do this?
+ * Can also use `cbind(a,b)` or `rbind(a,b)` with vectors `a`, `b` to create a matrix with
+   (named) columns resp. rows initialized with the values from `a` and `b` from top to bottom
+   resp. left to right.
+ * Operations vectorize here as well.
+ * **Note:** `m1 * m2` is element-wise multiplication; matrix multiplication is `%*%`.
+ * Assign names by `dimnames(m) <- list(c("row1", "row2", ...), c("col1", "col2", ...))`.
+   You can then access values by using names as well, e.g. `m["row1", "col2"]`.
+
+    *Note:* changing `dim(m)` will reset the names.
+
+### Factors
+
+ * Special type of vector for categorical data. Exists ordered and unordered.
+   Each entry (integers) have a *label*.
+
+   Use labels for your values ("male", "female") -- called *levels* -- which are internally
+   represented by integers (1,2).
+ * Modelling functions treat factors in special ways, e.g. `lm()` and `glm()` (see later).
+ * Use these over plain integers: more descriptive, can't be mistaken for continuous data.
+ * Create with `factor(v)` with `v` a character vector.
+ * Print nicely with `table(f)`.
+ * `unclass(x)` exposes internal representation.
+ * Reorder levels/labels by adding parameter `levels = c("label 1", "label 2", ...)` to `factor()`.
+   (Default: alphabetical. First is baseline level.)
+
+### Missing values
+
+ * `NaN` (undefined mathematical operations; "not a number") and `NA` (everything else; "missing values").
+ * Test with `is.na()` and `is.nan()`.
+ * `NA` values have a class (the one their should-be values would have had).
+ * `NaN` is a `NA`.
+
+### Data frames
+
+ * Represents tabular data
+ * Special type of list: list of colums (each of the same list). Columns can have different types.
+ * Data frames relate to matrices like lists to vectors.
+ * Create with `data.frage(column1 = vector1, column2 = vector2, ...)`.
+
+   Usually created by `read.table()` and `read.csv()`, though.
+ * Convert to a matrix by `data.matrix()` (values will be coerced).
+ * Special attribute `row.names`. Get number of rows and columns with `nrow()` and `ncol()`, resp.
+
+
+
+## Reading data into R
+
+ * `read.table` and `read.csv`: read tabular data, create data frames (inverse: `write.table`).
+ * `readLines` reads strings from an unstructured text file (inverse of `writeLines`).
+ * `source` reads R code files (inverse of `dump`).
+ * `dget` reads R code files with deparsed objects (inverse of `dput`).
+ * `load` reads saved workspaces (inverse of `save`).
+ * `unserialize` reads single R objects in binary form (inverse of `serialize`).
+
+### `read.table`
+
+Very common. Parameters:
+
+![Parameters of read.table](week1_read-table_params.png)
+
+ * Ad `stringsAsFactors`: defaults to `TRUE`, reads in character variables as factors.
+ * Often just `read.table("file")` works; R figures out stuff by itself.
+ * Lines beginning with `#` are automatically skipped.
+ * Specify more parameters to speed up reading data.
+
+`read.csv` is just `read.table` with comma as default separator (`read.table` uses space).
+
+When reading *large* files:
+
+ * Read `help(read.table)`. Lots of stuff for optimising calls there.
+ * Calculate a rough estimate for the amount of memory you will need.
+   Recall that R will store everything in memory!)
+
+   Size of values: 8 bytes per `numeric` (on 64bit).
+ * If there are comment lines, set `comment.char = ""`.
+ * Use `colClasses` -- otherwise R will go through the whole columns to figure out types.
+
+    Shorthand if all are the same: `colClasses = "type"`.
+
+    You can also make R infer types from a few lines by `a <- read.table("f", nrows = 100)`
+    and use `sapply(initial, class)` with the `colClasses` parameter for the call that
+    reads everything.
+ * Set `nrows` helps with memory usage. Mild overestimates (e.g. `wc -l f`) are okay.
+ * Know your system: RAM, other apps, other users, OS, 32 vs 64 bits
+
+### Textual data: `dump` and `dput`
+
+ * Good for storing data.
+ * Preserve *metadata*, e.g. types of values in objects.
+ * Can edit if absolutely necessary.
+ * Work well with VCS.
+ * Always accessible.
+ * Not very space efficient (but can compress).
+ * `dput` creates R code that recreates the exact object. `dget(dput(o))` gives `o`.
+ * `dump` is similar to `dput` but takes names of multiple objects (in a vector).
+   `source` reads files create by `dump`.
+
+
+### Interfaces
+
+There are *connections* to stuff outside of R. Common interface for different types of connections.
+
+ * `file` opens a connection to a file.
+
+    Parameter `open` can be `"r"` (read-only), `"w"` (writing), `"a"` (appending).
+    (Windows has `"rb"`, `"wb"` and `"ab"` for binary mode.)
+ * `gzfile` and `bzfile` open connections to compressed files.
+ * `url` opens a connection to a webpage.
+
+Ways to use the connection interface:
+
+ * `readLines(con, a)` will read `a` many lines only.
+ * `writeLines` takes a character vector; each element becomes a line in the target file.
+
+Close connections with `close(con)`.
+
+
+## Subsetting
+
+ * `[...]` returns an object of the same class as the original; can extract more than one element
+    (one exception).
+
+  * Can subset w.r.t. vectors of indices.
+  * Can use *logical* indices (predicates), e.g. `x[x > 5]` which is short for `u <- x > 5; x[u]`.
+  * Applied on lists, it gives you a list with the specified value(s).
+    Use `l[c("name1", "name2")]` to select a sublist by name.
+ * `[[...]]` extracts single elements only (from lists or data frames), ergo different type.
+
+  * Takes indices or names (as characters).
+  * **Note:** When given a sequence of integers, accesses *nested* elements -- unlike `[...]`!
+ * `$` extracts elements of lists of data frames *by name*; otherwise similar semantics as `[[...]]`.
+
+  * `x$bar` is the same as `x[["bar"]]`, both different from `x["bar"]`.
+  * Can not use computed names!
+  * *Note to self:* why should we ever use `$`? Just because it is shorter?
+
+### Matrices
+
+ * Use `m[i,j]` to access element `i` in row `j`.
+ * Missing indices mean "gives me all"; `m[i,]` gives ith row, `m[,j]` gives jth column.
+ * **Note:** By default, we *don't* get a 1x1 matrix when accessing a `m[i,i]`
+    but a vector with a single element; the dimension is dropped.
+    Similarly, whole rows or columns are given back as vectors.
+    Add `drop = FALSE` to suppress this.
+ 
+### Partial matching
+
+Speeds up interaction with the CLI. `l$f` will access the name which has `f` as prefix (and `NULL` if there is no single one such). Does not work with `[[...]]` in the same way, needs added `exact = FALSE`.
+
+*Note to self:* seems to be obsolete; probably bad style in scripts/programs and the interactive shell has tab-completion.
+
+### Removing missing values
+
+`x[!is.na(x)]` will give you the vector that contains all elements of `x` that are not `NA`.
+
+`complete.cases()` gives logical vector with `TRUE` in all positions at which *all* specified
+vectors are not `NA`. Also works with data frames: `frame[complete.cases(frame),]`.
