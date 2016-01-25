@@ -1,12 +1,13 @@
-Have R and RStudio installed. Okay, after course 1 we've got that.
+*Prerequisites:* Have R and RStudio installed. Okay, after course 1 we've got that.
+
+*Recommendation:* Have an R shell open while watching the lectures.
 
 ---
 
-This week covers:
+This week covers
 
- * basic datatypes and functions
- * basic syntax
- * profiling, debugging
+ * basic datatypes and functions, and
+ * basic syntax.
  
 ## Overview and History of R
 

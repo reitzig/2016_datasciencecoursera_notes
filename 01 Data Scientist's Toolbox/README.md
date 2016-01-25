@@ -13,3 +13,9 @@ resp. introductory form.
  * Some thoughts on Big Data
  * The importance of designing experiments that fit the question being asked
  * Some common issues: confounding, unwarranted prediction, data dredging
+ 
+Notes are organised by week:
+
+ * [Week 1](week1.md) (Introduction)
+ * [Week 2](week2.md) (Tools)
+ * [Week 3](week3.md) (Overview)

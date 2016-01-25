@@ -3,8 +3,15 @@
 These are my notes for the Data Science specialization on Coursera (started January 2016).
 I can not guarantee that they are completely accurate as they are a filtered 
 summary of the presented material with my interpretation and commentary.
+There are also augmentations from my own tinkering resp. research.
 
-To my knowledge, the notes contain no information directly related to any form of examination happening during the courses.
+To the best of my knowledge, the notes contain no information directly 
+related to any form of examination happening during the courses.
+
+The notes are organized by course:
+
+ * [Data Scientist's Toolbox](01 Data Scientist's Toolbox/README.md)
+ * [R Programming](01 R Programming/README.md)
 
 ---
 
