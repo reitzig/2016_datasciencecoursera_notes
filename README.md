@@ -15,6 +15,13 @@ The notes are organized by course:
 
 ---
 
+I have collected some potential upsets or pitfalls of the R language for your enjoyment:
+  [*The R is weird*](the-r-is-weird.md).
+Pull requests with rational explanations (target group: computer scientists, programmer)
+are appreciated.
+
+---
+
 This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
