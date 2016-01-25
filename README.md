@@ -11,7 +11,7 @@ related to any form of examination happening during the courses.
 The notes are organized by course:
 
  * [Data Scientist's Toolbox](01 Data Scientist's Toolbox/README.md)
- * [R Programming](01 R Programming/README.md)
+ * [R Programming](02 R Programming/README.md)
 
 ---
 
