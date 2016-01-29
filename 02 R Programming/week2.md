@@ -98,6 +98,101 @@
    calls to "legally" leave out parameters.
  * Don't use partial matches! We have tab-completion.
 
+
+## Scoping
+
+### Namespaces
+
+ * When trying to bind a value, R searches *environments*.
+   Run `searches()` to see which and in which order.
+ * The order can be defined (by the user).
+ * Load packages with `library` to get it on the list (at position 2, so
+   packages loaded later take precedence).
+ * Defining something in the interactive prompt puts in in the `.GlobalEnv`
+    environment (user workspace) -- the first one searched, so these take precedence.
+ * Functions and values have different namespaces.
+ 
+    *Note to self:* Apparently, functions are not *completely* first-class
+    objects?
+    
+### Scoping Rules
+
+ * R uses *static/lexical* scoping.
+ * There are function arguments, local variables and *free* variables.
+ * Values for free variables are searched for in the environment
+   in which the function was *defined* (not the one it was called in!).
+   
+   A function together with its environment is a *(function) closure*.
+ * Environments are collections of symbol-value pairs.
+ * There is a tree of environments, usually rooted with the global environment
+   or package environment.
+ * Values are searched from the function's parent environment upwards
+   towards the root, then down the search list.
+ * Changes of the values in the resp. environment between function calls
+   *will be reflected in future calls*.
+   Also, if the variable is newly defined in a higher-priority environment,
+   it will take precedence in future calls!
+   
+   *Question:* Okay, so we do they call it *static* binding?  
+   *Answer:* Because *dynamic* scoping searches from the call environment 
+     (called *parent frame* in R).  
+   *Note to self:* Better stick with *lexical* scoping.
+
+
+ * Things start to be interesting when functions return functions
+   that have free variables that bind to values defined in the body of
+   the outer function!
+   
+   Because then calling environment is not the same as the 
+   parent/definition environment.
+   
+   *Note to self:* Parent environment != parent frame. Good job.
+ * Access the environment of a function with `environment(f)`; 
+   list the variables with `ls(environment(f))`. 
+   Access their values with `get("name", environment(f))`.
+
+**Consequences**
+
+ * All objects have to be in memory, otherwise it's hard to maintain the
+    (inter-)linked structure.
+ * All functions must carry a pointer to their definition environment
+    (which we have to keep around!).
+
+### Application Example: Optimization
+
+ * Functions like e.g. `optim`, `nlm`, `optimize` take function parameters!
+   These can depend on all kinds of things, with all kinds of names
+   -- so we would not want some variable of the same name inside the
+   implementation of, say, `optim` overshadow the value we set outside!
+ * *Pattern:* Constructor function
+ 
+    ```R
+    constructor <- function(data, fixed=c(FALSE, ..., FALSE)) {
+      params <- fixed
+      function(p) {
+        params[!fixed] <- p
+        ... do stuff ...
+      }
+    }
+    ```
+    
+    This guy now creates functions (to be optimized) that depend on the
+    data and may have some of the model values fixed; the others get to be
+    parameters.
+    
+    For instance, `constructor(data, c(0, FALSE))` creates a function that
+    takes one parameter; `params` will end up being `c(0, p)`.
+ * This can be used to optimize one parameter of the model with the others
+   fixed, or plotting the values of the function in one parameter with the
+   others fixed -- all using the same constructor function, i.e. you
+   implement the model only once using *all* parameters, and decide at
+   call-site which parameters to fix to which values.
+ * Also, all the used data is "carried with" the thus constructed function.
+   This saves parameters.
+ * We get cleaner code -- yay!
+ 
+*Reference:* [Lexical Scope and Statistical Computing](http://dx.doi.org/10.1080/10618600.2000.10474895) by R. Gentleman and R. Ihaka (2000)
+
 ---
  
 *Note to self:* Yes, the column-means example function is unnecessarily ugly:
@@ -106,4 +201,4 @@
 sapply(1:ncol(mat), function(i) { mean(mat[,i]) })
 ```
     
-Now if only there were nicer syntax for anonymous functions...
+Now if only there was nicer syntax for anonymous functions...
