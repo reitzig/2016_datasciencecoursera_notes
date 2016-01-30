@@ -202,3 +202,20 @@ sapply(1:ncol(mat), function(i) { mean(mat[,i]) })
 ```
     
 Now if only there was nicer syntax for anonymous functions...
+
+---
+
+## Dates and times
+
+ * `Date` for dates (#days since 1970-1-1), 
+   `POSIXct` (just an integer) and `POSIXlt` (a list with all kinds of information)
+    for times (#seconds since 1970-1-1).
+ * Create dates with `as.Date("YYYY-mm-dd")`.
+ * `Sys.time()` gets you the current time (as `POSIXct`).
+ * Use `strptime()` to create times from (almost) arbitrary strings; 
+   it's `printf`-style, see `?strptime` for details.
+ * `as.POSIXlt()` gets you the list version of a time, `as.POSIXct()` the int one.
+ * Get internal representation by `unclass()`.
+ * Access details with e.g. `weekdays()`, `months()`, `quarters()`.
+ * You can use some operators with dates/times, e.g. `+`, `-`, `==`, `<=`.
+ * Plotting functions treat dates/times specially.
