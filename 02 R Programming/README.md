@@ -5,7 +5,10 @@ This course covered the the basics of R programming.
 Notes are organised by week:
 
  * [Week 1](week1.md): History, ecosphere and basic data types.
- * [Week 2](week2.md): Control structures, functions.
+ * [Week 2](week2.md): Control structures, functions, dates and times.
+ * [Week 3](week3.md): .
+
+I also did some of the [swirl lessons](lessons-swirl.md).
  
 ## Installing recent R and swirl on Ubuntu
 

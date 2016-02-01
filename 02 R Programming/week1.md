@@ -8,39 +8,39 @@ This week covers
 
  * basic datatypes and functions, and
  * basic syntax.
- 
+
 ## Overview and History of R
 
 Find resources on [CRAN](http://cran.r-project.org).
 
 Springer has a book series called *Use R!*.
 Other books are listed on [r-project.org/doc/bib/R-books](http://r-project.org/doc/bib/R-books.html).
- 
+
 ### History of R
 
  * R is a dialect of S
  * S (Bell labs)
- 
+
     * 1976: Fortran libraries for statistics
     * 1988: C rewrite
     * 1998: version 4 (basically current version)
-   
+
    Commercially owned (TIBCO; today S-PLUS).
-   
-   *Key idea:* 
-   interactive environment; 
+
+   *Key idea:*
+   interactive environment;
    should not feel like programming (in the beginning);
    focus on doing statistical analysis;
    ease user into programming
-  
+
  * R: started 1991, announced 1993
-   
+
    * 1995: GPL
    * 1997: R Core Group formed (controls primary source code)
    * 2000: v1.0.0
    * 2013: v3.0.2
    * ongoing development
-   
+
 ### Features of R
 
  * Syntax: similar to S
@@ -48,11 +48,11 @@ Other books are listed on [r-project.org/doc/bib/R-books](http://r-project.org/d
  * Runs "everywhere".
  * Frequent releases, very active development.
  * Core R is lean; many modular packages
- * Lots of graphical functionality 
+ * Lots of graphical functionality
  * Smooth transition from user to programmer
  * Active user community (mailing lists, SO)
  * Free -- no cost *and* [Stallman-free](http://fsf.org)!
- 
+
 ### Drawbacks of R
 
  * Based on 40-year-old technology.
@@ -62,11 +62,11 @@ Other books are listed on [r-project.org/doc/bib/R-books](http://r-project.org/d
     (Just like any software that is not owned by a company, duh.)
  * Object size limited by physical memory (solutions may be upcoming).
  * Not ideal for *everything* -- of course not!
- 
+
 ### Design of the R system
 
-Base system (`base` plus some other packages, plus some recommended packages), 
-then everything else. 
+Base system (`base` plus some other packages, plus some recommended packages),
+then everything else.
 Find all the stuff on CRAN (4000+ packages) and bioconductor.org.
 More things exist off these platforms.
 
@@ -74,7 +74,7 @@ More things exist off these platforms.
 
 ## R Basics: Data types
 
- * There are five atomic classes: 
+ * There are five atomic classes:
    `character` (strings), `numeric` (real numbers), `integer`, `complex` and `logical` (boolean).
  * Next most basic object: `vector` of things of the same class.
  * `list` is like a vector, but can contain objects of different classes.
@@ -86,6 +86,7 @@ More things exist off these platforms.
  * Objects can have *names*. Access with `names(o)`. Use to have self-describing data!
 
     For atomic values, use `names(o) <- "name"`.
+ * There are lots of conversion functions names `as.X`.
 
 ### Vectors
 
@@ -97,7 +98,7 @@ More things exist off these platforms.
  * Arithmetic operators/relations are overloaded to work in element-wise fashion as well.
     These vectorize, i.e. can be evaluated in parallel.
  * Assign names by `names(x) <- c("name1", ...)`.
-    
+
 ### Lists
 
  * Create with `list(a,b,c,...)`.
@@ -131,6 +132,7 @@ More things exist off these platforms.
    You can then access values by using names as well, e.g. `m["row1", "col2"]`.
 
     *Note:* changing `dim(m)` will reset the names.
+ * Transpose matrices with `t()`.
 
 ### Factors
 
@@ -157,13 +159,25 @@ More things exist off these platforms.
 ### Data frames
 
  * Represents tabular data
- * Special type of list: list of colums (each of the same list). Columns can have different types.
+ * Special type of list: list of columns (each of the same list). Columns can have different types.
  * Data frames relate to matrices like lists to vectors.
- * Create with `data.frage(column1 = vector1, column2 = vector2, ...)`.
+ * Create with `data.frame(column1 = vector1, column2 = vector2, ...)`.
 
    Usually created by `read.table()` and `read.csv()`, though.
  * Convert to a matrix by `data.matrix()` (values will be coerced).
  * Special attribute `row.names`. Get number of rows and columns with `nrow()` and `ncol()`, resp.
+ * Transpose data frames with `t()`.
+ * Keep in mind function `na.omit` et al. -- they detect and clean out `NA`s
+   from data frames. No need to wrangle with complicated logical indices.
+   For instance:
+
+   ```R
+    > x <- data.frame(c(1,NA,NA,2),c(NA,3,NA,4))
+    > colnames(x) <- c("A","B")
+    > na.omit(x)
+    A B
+    4 2 4
+    ```
 
 
 
@@ -248,6 +262,9 @@ Close connections with `close(con)`.
   * Can use *logical* indices (predicates), e.g. `x[x > 5]` which is short for `u <- x > 5; x[u]`.
   * Applied on lists, it gives you a list with the specified value(s).
     Use `l[c("name1", "name2")]` to select a sublist by name.
+  * Applied to data frames, `df[p, cols]` gives you a new data frame consisting
+    of the columns with the names in (character) vector `cols` that are marked
+    by logical index `p`.
  * `[[...]]` extracts single elements only (from lists or data frames), ergo different type.
 
   * Takes indices or names (as characters).
@@ -258,6 +275,10 @@ Close connections with `close(con)`.
   * Can not use computed names!
   * *Note to self:* why should we ever use `$`? Just because it is shorter?
 
+ * `which()` extracts the integer indices at which a logical index is `TRUE`.
+   For example, `which(1:10 %% 2 == 0)` returns `c(2,4,6,8,10)` -- which
+   can be used for subsetting just like the logical index (and other things).
+
 ### Matrices
 
  * Use `m[i,j]` to access element `i` in row `j`.
@@ -266,7 +287,7 @@ Close connections with `close(con)`.
     but a vector with a single element; the dimension is dropped.
     Similarly, whole rows or columns are given back as vectors.
     Add `drop = FALSE` to suppress this.
- 
+
 ### Partial matching
 
 Speeds up interaction with the CLI. `l$f` will access the name which has `f` as prefix (and `NULL` if there is no single one such). Does not work with `[[...]]` in the same way, needs added `exact = FALSE`.
