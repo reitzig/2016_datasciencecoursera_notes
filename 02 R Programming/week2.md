@@ -39,8 +39,11 @@
 ### Defining Functions
 
  * Define (anonymous) functions by `function(params) { ... }`.
-  * Since functions are values, you "name" them just like any other value:
+ * Since functions are values, you "name" them just like any other value:
     `foo <- function(...) {...}`.
+
+ * Using special names of the form `"%name%"` you can define binary/infix
+   operators.
  * Default values are specified as usual, e.g.
     `function(x, y=10) { ... }`.
 
@@ -65,6 +68,8 @@
      in combination with named arguments `...` can occur anywhere.
      Unnamed or partially named parameters will simply be swallowed by `...`.
      Check out `paste` and `cat`, for instance.
+
+    Unpack `...` by `list(...)`; parameter names carry over.
 
 ### Using functions
 
@@ -92,6 +97,8 @@
 
 *Notes to self:*
 
+ * Get the source code of any function by typing its name (like a variable).
+   `args()` and `?` get more structured information.
  * In code that is to be read by others,
    use named arguments for function calls whenever there can be *any* unclarity.
  * Avoid using missing parameters as a feature. Specify defaults if you want
@@ -214,20 +221,39 @@ Now if only there was nicer syntax for anonymous functions...
    `POSIXct` (just an integer) and `POSIXlt` (a list with all kinds of information)
     for times (#seconds since 1970-1-1).
  * Create dates with `as.Date("YYYY-mm-dd")`.
- * `Sys.time()` gets you the current time (as `POSIXct`).
+ * `Sys.date` and `Sys.time()` get you the current date and time (as `POSIXct`),
+    respectively.
  * Use `strptime()` to create times from (almost) arbitrary strings;
    it's `printf`-style, see `?strptime` for details.
  * `as.POSIXlt()` gets you the list version of a time, `as.POSIXct()` the int one.
  * Get internal representation by `unclass()`.
+   `str(unclass())` can give a more readable output.
  * Access details with e.g. `weekdays()`, `months()`, `quarters()`.
  * You can use some operators with dates/times, e.g. `+`, `-`, `==`, `<=`.
+ * Differences can also be computed using `difftime()` which allows to
+   set the unit of the result.
  * Plotting functions treat dates/times specially.
+ * When using dates often, package `lubridate` may be worth checking out.
 
 ## Strings
 
  * `sprintf` is a neat way to construct strings from multiple values.
    It works just as in other languages and seems to be the only feasible
    way of dealing with strings.
+ * `paste()` is what other languages call `join`.
+
+   Distinguish parameters `collapse` and `sep` when passing multiple vectors!
+   `sep` controls with what to separate components, `collapse` if and how
+   the resulting vector is flattened. For instance:
+
+   ```R
+   > paste(1:3, c(4:6), sep=" ", collapse=" -- ")
+   [1] "1 4 -- 2 5 -- 3 6"
+   > paste(1:3, c(4:6), sep=" ")
+   [1] "1 4" "2 5" "3 6"
+   ```
+ * Nice to know: `LETTERS` and `letters` contain `A..Z` and `a..z`,
+   respectively.
 
 ## Getting all file names in a directory
 

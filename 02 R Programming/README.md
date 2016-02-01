@@ -8,13 +8,15 @@ Notes are organised by week:
  * [Week 2](week2.md): Control structures, functions, dates and times.
  * [Week 3](week3.md): .
 
-I also did some of the [swirl lessons](lessons-swirl.md).
- 
+I also did some of the swirl lessons. I put what I learned where it fit
+best in the above files; thing that did not fit anywhere went
+[to their own file](lessons-swirl.md).
+
 ## Installing recent R and swirl on Ubuntu
 
 I had installed R from the Ubuntu repositories (14.04 LTS) which was
 some version 3.0.x. It was not possible to install swirl on that.
-I followed 
+I followed
   [this guide](https://www.digitalocean.com/community/tutorials/how-to-set-up-r-on-ubuntu-14-04)
 to get swirl installed. In a nutshell:
 

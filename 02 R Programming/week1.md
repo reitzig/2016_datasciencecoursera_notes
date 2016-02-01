@@ -90,14 +90,21 @@ More things exist off these platforms.
 
 ### Vectors
 
- * Create with `c(a,b,c,...)`.
+ * Create with `c(a,b,c,...)`. If you use named parameters,
+   the components will have these names.
+
+    Useful parameter: `recursive = TRUE` flattens vectors or lists among the
+    parameters.
+ * Appending works by *nesting*: `c(c(1,2),3)` gives the same as `c(1,2,3)`.
  * Only one type; if you mix types objects are *coerced* to a "least common denominator" type.
  * `as.<type>(x)` converts `x` to `<type>` (a basic type).
     If a value can not be coerced, you get `NA`s.
  * Scalar functions apply to vectors in element-wise fashion.
  * Arithmetic operators/relations are overloaded to work in element-wise fashion as well.
     These vectorize, i.e. can be evaluated in parallel.
- * Assign names by `names(x) <- c("name1", ...)`.
+ * Assign names after creation by `names(x) <- c("name1", ...)`.
+ * Check vectors for equality with `identical()`.
+ * `length()` gives you the number of elements.
 
 ### Lists
 
@@ -167,7 +174,7 @@ More things exist off these platforms.
  * Convert to a matrix by `data.matrix()` (values will be coerced).
  * Special attribute `row.names`. Get number of rows and columns with `nrow()` and `ncol()`, resp.
  * Transpose data frames with `t()`.
- * Keep in mind function `na.omit` et al. -- they detect and clean out `NA`s
+ * Keep in mind functions `na.omit` et al. -- they detect and clean out `NA`s
    from data frames. No need to wrangle with complicated logical indices.
    For instance:
 
@@ -258,7 +265,8 @@ Close connections with `close(con)`.
  * `[...]` returns an object of the same class as the original; can extract more than one element
     (one exception).
 
-  * Can subset w.r.t. vectors of indices.
+  * Can subset w.r.t. vectors of indices. Positive indices mean "take that
+    element", negative one "don't take that element". No mixing of the two.
   * Can use *logical* indices (predicates), e.g. `x[x > 5]` which is short for `u <- x > 5; x[u]`.
   * Applied on lists, it gives you a list with the specified value(s).
     Use `l[c("name1", "name2")]` to select a sublist by name.
