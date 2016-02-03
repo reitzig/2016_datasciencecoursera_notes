@@ -49,6 +49,8 @@
 
    You can use `NULL` as default value if there is no good default value.
  * Last expression is return value; or whatever we `return` explicitly.
+
+   Return `invisible(x)` to prevent auto-printing.
  * There is special argument name `...` which collects an arbitrary number of
    arguments. So, for instance:
 

@@ -15,7 +15,8 @@ The notes are organized by course:
 
 Some additional material I compiled:
 
- * [Lessons learned by swirl](02 R Programming/lessons-swirl.md)
+ * [Lessons learned from swirl](02 R Programming/lessons-swirl.md)
+ * [From the book](from-the-book.md)(s)
  * [The R is weird](the-r-is-weird.md)
 
     I have collected some potential upsets or pitfalls of the R language for your enjoyment.

@@ -26,7 +26,7 @@ Some things I found confusing, hilarious and/or enraging:
    but uses elements of both (awkwardly).
  * All libraries dump their functions into the global namespace.
  * If you set the dimension of a vector, you convert it into a matrix,
-   class and everything.
+   class and everything. But you call it "array".
  * `&&` and `||` do not mean the same as everywhere (?) else.
  * Objects can have multiple classes, e.g. `class(Sys.time())`.
 

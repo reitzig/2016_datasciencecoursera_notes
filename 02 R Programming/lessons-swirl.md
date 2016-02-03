@@ -1,4 +1,4 @@
-Here is collect what I learned during the optional swirl lessons
+Here I collect what I learned during the optional swirl lessons
 and did not fit in the other files.
 
 ## File management
@@ -39,10 +39,13 @@ and did not fit in the other files.
 * Use `isTRUE()` to check booleans if they could be `NA`; evaluating
   `if ( NA) ...` will only get you errors.
 * `which()` gives the indices at which the given logical vector is `TRUE`.
-  `any()` and `all()` are vector-or and vector-and. 
+  `any()` and `all()` are vector-or and vector-and.
 
 ## Assorted
 
  * `par()` gives lots of graphical parameters.
  * `rnorm()` samples random numbers from a normal distribution.
+ * `runif()` samples random numbers from a uniform distribution.
  * `sample()` samples uniformly from vectors.
+ * > `table()` uses the cross-classifying factors to build a contingency
+   >  table of the counts at each combination of factor levels.

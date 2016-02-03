@@ -155,6 +155,8 @@ More things exist off these platforms.
  * `unclass(x)` exposes internal representation.
  * Reorder levels/labels by adding parameter `levels = c("label 1", "label 2", ...)` to `factor()`.
    (Default: alphabetical. First is baseline level.)
+ * Generate numerical factors concisely with `gl()`
+ * Combine factors with `interaction()`.
 
 ### Missing values
 
