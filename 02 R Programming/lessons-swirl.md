@@ -47,5 +47,7 @@ and did not fit in the other files.
  * `rnorm()` samples random numbers from a normal distribution.
  * `runif()` samples random numbers from a uniform distribution.
  * `sample()` samples uniformly from vectors.
+ * `set.seed()` sets the seed of the used PRNG -- use for reproducibility!
  * > `table()` uses the cross-classifying factors to build a contingency
    >  table of the counts at each combination of factor levels.
+ * `sessionInfo()` and `devtools::session_info()`
