@@ -6,9 +6,8 @@ and did not fit in the other files.
  * `list.files()` -- `ls`.
 
    *Fun fact:* `ls()` lists variables defined in the environment.
- * `(file|dir).create()`, `file.copy()`, `file.rename()`, `file.remove()` resp.
-   `unlink()`, `(file|dir).exists()`
-    --
+ * `(file|dir).create()`, `file.copy()`, `file.rename()`, `file.remove()`
+    resp. `unlink()`, `(file|dir).exists()`;  
     `touch`, `mkdir`, `cp`, `mv`, `rm` resp. `rmdir`/`unlink`,
     and checks as expected.
  * `file.info()` -- detailed information, similar to what `ls -l` gives.
@@ -40,6 +39,39 @@ and did not fit in the other files.
   `if ( NA) ...` will only get you errors.
 * `which()` gives the indices at which the given logical vector is `TRUE`.
   `any()` and `all()` are vector-or and vector-and.
+
+## Looking at data
+
+ * `class()`
+ * Data frames: `dim()`, `nrow()`, `ncol()` for dimensions;
+   `names()` for a vector of column names.
+ * `object.size()`
+ * `(head|tail)(x, n)` gives the first|last `n` rows of `x`.
+ * `summary()` gives a gross overview over the given data.
+ * `table()` shows the occurrence counts of values.
+ * `str()` summarizes the structure of data in readable form.
+
+## Random Sampling
+
+ * `sample()` samples from a fixed collection of values.
+ * Distribution-specific functions are `r[name]()` (random sample),
+   `d[name]()` (density function), `p[name]()` (cumulative distribution
+   function), and `q[name]()` (quantiles; the inverse of the CDF).
+
+    Distributions include `binom`, `norm`, `pois`, `exp`, `chisq`,
+    `gamma`, ... They take parameters as you would expect from their
+    resp. mathematical formulations/parameterizations.
+ * `pX()` and `dX()` can do lower and upper tail.
+ * For reproducibility, set the seed with `set.seed()`.
+ * Use `replicate` for repeating a sampling multiple times (independently).
+
+## Plotting
+
+ * `plot()` creates scatterplots. Note the formula interface.
+   Many more options beyond `?plot`; see e.g. `?par`, `?points`.
+ * `boxplot()` creates box-and-whisker plots.
+ * `hist()` creates histograms.
+ * More advanced: `lattice`, `ggplot2`, `ggvis`.
 
 ## Assorted
 

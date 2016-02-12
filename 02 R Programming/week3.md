@@ -11,7 +11,7 @@ or "map-reduce" in more "modern" terms?
 
 ### `lapply`
 
-**Input:** A list `[l1,...,ln]` and a function `f`.
+**Input:** A list `[l1,...,ln]` and a function `f`.  
 **Output:** A list of the same length: `[f(l1), ..., f(ln)]`.
 
 Remarks:
@@ -38,7 +38,7 @@ Calls `lapply` and then attempts simplification (to a vector).
  * If every element has the same amount of elements $>1$, the output is a matrix.
  * Else, the list is returned without simplification.
 
-`‘sapply(x, f, simplify = FALSE, USE.NAMES = FALSE)`
+`sapply(x, f, simplify = FALSE, USE.NAMES = FALSE)`
 is the same as `lapply(x, f)`.
 
 ### `mapply`
