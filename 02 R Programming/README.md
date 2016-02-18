@@ -8,6 +8,7 @@ Notes are organised by week:
  * [Week 2](week2.md): Control structures, functions, dates and times.
  * [Week 3](week3.md): Loop functions (aka "attempts at functional programming")
                        and debugging.
+ * [Week 4](week4.md): Data inspection, random sampling and profiling.
 
 I also did the (optional) swirl lessons, which I can only recommend.
 Ideally, do them *before* watching the videos!

@@ -7,7 +7,7 @@
  * Applies to functions as well!
  * Does all kinds of neat things on the different object types, trying
    to guess what you would be most interested in.
- * Nifty: combine with `split()` like e.e.
+ * Nifty: combine with `split()` like e.g.
 
    ```R
    str(split(airquality, airquality$Month))
