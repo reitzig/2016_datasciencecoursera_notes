@@ -55,8 +55,10 @@ Four things to have:
      * No parameters.
      * If more convenient, exact and explicit instructions for humans are
         okay as well.
+    
+## Getting Data
         
-## Downloading files
+### Downloading files
 
  * Can be part of the processing script!
  * In R: `download.file()` with parameters `url`, `destfile`, `method`.
@@ -64,18 +66,19 @@ Four things to have:
     HTTPS links may require `curl` as method.
  * Store the date and time you downloaded using `date()`.
  
-## Reading local flat files
+### Reading local flat files
 
 See [R Programming](../02 R Programming/README.md).
+Also, see `?connections`.
 
-## Reading Excel files
+### Reading Excel files
 
 Use `read.xlsx()` or `read.xlsx2()` from the `xlsx` package.
 There is also `write.xlsx()`.
 
 More powerful: XLConnect package.
 
-## Reading XML files
+### Reading XML files
 
 Use `xmlTreeParse()` or `xmlParse()` (also `htmlTreeParse()`) from the `XML`
 package to get the tree in an R representation. Functions on XML trees:
@@ -89,11 +92,11 @@ package to get the tree in an R representation. Functions on XML trees:
  * Can use XPath with e.g. `xpathSApply(node, query, fct)` or 
    `getNodeSet(node, query)`.
  
-## Reading JSON files
+### Reading JSON files
 
 Use `fromJSON()` from the `jsonlite` package. There is also `toJSON()`.
 
-## Using data.table
+### Using data.table
 
 Function `data.table()` from the `data.table` package is similar to `data.frame`
 but much more efficient.
