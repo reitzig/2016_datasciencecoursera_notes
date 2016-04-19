@@ -105,6 +105,8 @@ More things exist off these platforms.
  * Assign names after creation by `names(x) <- c("name1", ...)`.
  * Check vectors for equality with `identical()`.
  * `length()` gives you the number of elements.
+ * `val %in% vector` checks membership.
+ * Cut a vector into a factor (e.g. by quantiles obtained from `quantile`) using `cut()`.
 
 ### Lists
 
@@ -118,6 +120,7 @@ More things exist off these platforms.
     *Note to self:* look up what lists *actually* are, and how they are represented.
     They are quite clearly not "just like vectors".
  * Assign names by using named parameters in `list` call, e.g. `list(a = 1, b = 2)`.
+ * `unlist()` transforms a list into a vector.
 
 ### Matrices
 
@@ -275,6 +278,7 @@ Close connections with `close(con)`.
   * Applied to data frames, `df[p, cols]` gives you a new data frame consisting
     of the columns with the names in (character) vector `cols` that are marked
     by logical index `p`.
+  * Passing `order()` as row index sorts the rows (see also library `plyr`).
  * `[[...]]` extracts single elements only (from lists or data frames), ergo different type.
 
   * Takes indices or names (as characters).
