@@ -235,6 +235,7 @@ Now if only there was nicer syntax for anonymous functions...
  * Differences can also be computed using `difftime()` which allows to
    set the unit of the result.
  * Plotting functions treat dates/times specially.
+ * Format dates with `format()`.
  * When using dates often, package `lubridate` may be worth checking out.
 
 ## Strings
