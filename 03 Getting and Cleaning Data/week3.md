@@ -100,6 +100,8 @@ Common format: parameters are data frame + actions; refer to columns directly by
     * `mutate(df, x = ..., y = 2^x)` -- variable definitions can use
        new variables defined "earlier".
        
+    * Note also `mutate_each()`.
+       
  * **group_by** -- arranges rows according to values of variables
     or factors. It amounts to a "behind-the-scenes split".
  
@@ -113,6 +115,8 @@ Common format: parameters are data frame + actions; refer to columns directly by
       -- creates a new data frame with one row of summary statistics per group.
       
       Add `na.rm = TRUE` to `mean()` et al. to ignore NAs.
+   
+    * Note also `summarize_each()`.
 
 
 *Special feature:* pipeline operator `%>%` allows to skip temporary variables.
