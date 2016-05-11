@@ -23,6 +23,11 @@ Some additional material I compiled:
     I have collected some potential upsets or pitfalls of the R language for your enjoyment.
     Pull requests with rational explanations (target group: computer scientists, programmer)
     are appreciated.
+    
+Material by other people:
+
+ * [Data Science Specialization](http://datasciencespecialization.github.io/)
+ * [Data Science Boot-Camp Survival Manual](https://www.gitbook.com/book/gdhorne/data-science-boot-camp-survival-manual/details)
 
 ---
 
