@@ -13,6 +13,7 @@ The notes are organized by course:
  * [Data Scientist's Toolbox](01 Data Scientist's Toolbox/README.md)
  * [R Programming](02 R Programming/README.md)
  * [Getting and Cleaning Data](03 Getting and Cleaning Data/README.md)
+ * [Exploratory Data Analysis](04 Exploratory Data Analysis/README.md)
 
 Some additional material I compiled:
 

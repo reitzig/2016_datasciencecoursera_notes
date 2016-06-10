@@ -7,3 +7,4 @@ Notes are organised by week:
  * [Week 1](week1.md): introduction and reading from several file formats.
  * [Week 2](week2.md): reading from databases, websites and APIs.
  * [Week 3](week3.md): cleaning and reformatting data; introducing `dplyr`.
+ * [Week 4](week4.md): working with strings and dates.
