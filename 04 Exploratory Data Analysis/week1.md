@@ -159,8 +159,4 @@ The *outer* margin surrounds all of them!
  * `mtext` -- add text to the margins
  * `axis` -- add axis ticks/labels
  * `abline` -- adds a line that is an output of e.g. `lm()`.
- * `legend` -- adds a legend.
-
-### Lattice
-
-Packages: `lattice`, `grid`.
+ * `legend` -- adds a legend. 
