@@ -89,8 +89,8 @@ You can do things like `log(x)`, obviously.
 Adding a parameter `color = factor` (which is an aesthetic) groups points.
 
 You can control how the data is shown by adding a parameter `geom = c(...)`
-with values like `"points"` (the individual values), `"smooth"` 
-(a smoothed line through the line with a corridor) or `"density"`
+with values like `"point"` (the individual values), `"smooth"` 
+(a smoothed line through the line with a confidence interval) or `"density"`
 (a smoothed line for histograms).
 
 A longer version for adding geoms is by *adding* them. For instance:
@@ -173,7 +173,7 @@ For instance, you can do:
 geom_point(color = "steelblue", size = 4, alpha = 1/2)
 
 # Grouping!
-geom_poing(aes(color = f), size = 4, alpha =  1/2)
+geom_point(aes(color = f), size = 4, alpha =  1/2)
 
 # Dottet, thicker smooth line
 geom_smooth(size = 2, linetype = 3, method = "lm", se = F)
@@ -188,3 +188,28 @@ g + geom_line() + ylim(a,b)
 # All points are used for plotting but the plot area is clipped
 g + geom_line() + coord_cartesian(ylim = c(a,b))
 ```
+
+### Colors
+
+Color palettes in the `grDevices` package include `heat.colors()` and `topo.colors()`.
+Function `colors()` lists all colors that can be used with plotting functions.
+Package `RColorBrewer` has some more palettes for sequential, divergent and
+qualitative data; `brewer.pal()` gets you sequences that can be used with
+the functions below.
+
+Function `colorRamp()` can be used to create functions that model gradients.
+For instance:
+
+```R
+grad <- colorRamp(c("red", "blue"))
+grad(0)              # red
+grad(1)              # blue
+grad(0.5)            # purple
+grad(seq(0,1,len=6)) # six colors spread evenly between red and blue
+```
+
+Function `colorRampPalette()` gives you a function that does the last directly,
+i.e. gives you a number of colors spanning the spectrum. Results of this function
+can be passed to plotting functions like `image()`.
+
+Function `rgb(r,g,b,a)` lets you create arbitrary RPG colors with optional alpha.
