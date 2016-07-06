@@ -191,6 +191,8 @@ g + geom_line() + coord_cartesian(ylim = c(a,b))
 
 ### Colors
 
+Running `colors()` gives you all available color names.
+
 Color palettes in the `grDevices` package include `heat.colors()` and `topo.colors()`.
 Function `colors()` lists all colors that can be used with plotting functions.
 Package `RColorBrewer` has some more palettes for sequential, divergent and
@@ -213,3 +215,4 @@ i.e. gives you a number of colors spanning the spectrum. Results of this functio
 can be passed to plotting functions like `image()`.
 
 Function `rgb(r,g,b,a)` lets you create arbitrary RPG colors with optional alpha.
+The `colorspace` package offers different ways to control color.

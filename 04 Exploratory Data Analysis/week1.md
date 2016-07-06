@@ -121,8 +121,9 @@ Use `example()` for checking some parameters, e.g. `example(points)`.
 
 **Initialisation**
 
-Use e.g. `plot()` (generic, many parameters!), `boxplot()` and `hist()` 
-to start a graphics device (if there is not already one) and draw a new plot.
+Use e.g. `plot()` (generic, many parameters!), `boxplot()`, `hist()`, 
+`smoothScatter()` et al. to start a graphics device (if there is not already one) 
+and draw a new plot.
 Use `type = "n"` to not plot any date, for instance if you want to 
 add points in subsets later.
 
