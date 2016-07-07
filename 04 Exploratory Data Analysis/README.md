@@ -1,6 +1,7 @@
 # Exploratory Data Analysis
 
-This course covers 
+This course covers how to quickly get an overview over data and
+find patterns that are worth investigating.
 
 Notes are organised by week:
 

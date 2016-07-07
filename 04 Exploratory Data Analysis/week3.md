@@ -92,7 +92,7 @@ Assume we have many multivariate variables. There are two goals one might have:
 
 Solutions include:
 
-  1. *Singular value decomposition*:
+ 1. *Singular value decomposition*:
  
       If $X$ is a matrix with each variable in a column and each observation
       in a row, then the SVD is a *matrix decomposition*
