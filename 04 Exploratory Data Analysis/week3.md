@@ -22,7 +22,7 @@ Iteratively merge the two *closest* (groups of) things.
 How do we define the distance of *clusters* of points? Options include
 
  * complete linkage (maximum pairwise distance),
- * average linkage (distance of centers of mass).
+ * average linkage (distance of means/centers of mass).
  
 While the algorithm is deterministic, the outcome differs a lot with above
 choices, plus where to cut off the tree. Good for exploratory analyses, but
@@ -33,7 +33,8 @@ So how to do this in R?
 
  1. Compute all pairwise distances with `dist()`.
  2. Compute the clustering with `hclust()` (pass it the distance matrix).
- 3. Plot the dendrogram of the result with `plot()`.
+ 3. Plot the dendrogram of the result with `plot(_)` or
+    `plot(as.dendrogram(_))`.
  
 *Note:* For slightly fancier dendrograms, download `myplclust` from the
 course repository. More examples are on 
@@ -93,26 +94,27 @@ Solutions include:
 
   1. *Singular value decomposition*:
  
-     If $X$ is a matrix with each variable in a column and each observation
-     in a row, then the SVD is a *matrix decomposition*
-     $X = UDV^T$
-     where the columns of $U$ are orthogonal (left-singular vectors), 
-     the columns of $V$ are orthogonal (right-singular vectors), and
-     $D$ is a diagonal matrix (singular values).
+      If $X$ is a matrix with each variable in a column and each observation
+      in a row, then the SVD is a *matrix decomposition*
+      $X = UDV^T$
+      where the columns of $U$ are orthogonal (left-singular vectors), 
+      the columns of $V$ are orthogonal (right-singular vectors), and
+      $D$ is a diagonal matrix (singular values).
      
-     The idea is that if you use only the first few rows/columns of the
-     three matrices, you get an approximation of the data. So, the first
-     few rows/matrices of $U$ and $V$ (rescaled according to $D$) can serve
-     as a more compact stand-in for the real data.
+      The idea is that if you use only the first few rows/columns of the
+      three matrices, you get an approximation of the data. So, the first
+      few rows/matrices of $U$ and $V$ (rescaled according to $D$) can serve
+      as a more compact stand-in for the real data.
      
-     Use `svd(matrix)` to get it.
+      Use `svd(matrix)` to get it.
      
-     The entries in $D$ correspond to the percentage of the overall variation
-     explained by that component ("Variance explained") after squaring
-     and dividing by the sum of squares of the values, that is
-     `svd$d^2/sum(svd$d^2)`.
-     That is, they indicate which principle component influences the data by how
-     much.
+      The entries in $D$ correspond to the percentage of the overall variation
+      explained by that component ("Variance explained") after squaring
+      and dividing by the sum of squares of the values, that is
+      `svd$d^2/sum(svd$d^2)`.
+      That is, they indicate which principle component influences the data by how
+      much.
+     
 
  2. *Principle Components Analysis*
   
@@ -120,9 +122,14 @@ Solutions include:
       in the SVD, if you first scale (subtract the mean, divide by the standard 
       deviation) the variables.
   
-      Get it by `svd(scale(matrix))$v`.
+      Get it by `svd(scale(matrix))$v` or `prcomp(scale(matrix))`.
       
       These vectors expose patterns in the data, but may mix them up.
+      
+      Read more in 
+        [A Tutorial on Principal Component Analysis](http://arxiv.org/pdf/1404.1100.pdf)
+      by Jonathon Shlens.
+
       
 **Problem:** What about `NA`s? There are many possibilities.
 On possibility:
