@@ -1,6 +1,6 @@
 # Reproducible Research
 
-This course covers TBW
+This course covers the basic concepts of and R techniques for reproducible research.
 
 Notes are organised by week:
 
