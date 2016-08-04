@@ -78,6 +78,11 @@ library(knitr)
 knit2html("my.Rmd")
 ```
 
+### RPubs
+
+[RPubs.com](http://rpubs.com) allows you to publish R Markdown documents
+easily and directly from RStudio (`Publish`).
+
 ### Tips and Tricks
 
  * Use package `xtable` to create nice tables. For example:
