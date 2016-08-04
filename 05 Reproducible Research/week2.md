@@ -98,3 +98,7 @@ easily and directly from RStudio (`Publish`).
     `fig.(height|width)` (numeric).
     
  * Use `cache=T` to store results of expensive chunks. Observe caveats.
+ 
+ * Use package `cacher` to store and share results of (expensive) computations.
+    It provides functions to run code, trace back where objects came from,
+    and verify that the stored objects did indeed result from the code at hand.

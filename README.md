@@ -23,7 +23,7 @@ Some additional material I compiled:
  * [The R is weird](the-r-is-weird.md)
 
     I have collected some potential upsets or pitfalls of the R language for your enjoyment.
-    Pull requests with rational explanations (target group: computer scientists, programmer)
+    Pull requests with rational explanations (target group: computer scientists, programmers)
     are appreciated.
     
 Material by other people:
@@ -37,7 +37,7 @@ This work is licensed under a <a rel="license" href="http://creativecommons.org/
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 
-Due to the nature of the material, many phrasing and some graphics are taken more
+Due to the nature of the material, many phrasings and some graphics are taken more
 or less literally from the
   [course materials](https://github.com/DataScienceSpecialization/courses),
 which I reshare in accordance with with CC-BY-NC-SA license the material has
