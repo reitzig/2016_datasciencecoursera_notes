@@ -14,6 +14,7 @@ The notes are organized by course:
  * [R Programming](02 R Programming/README.md)
  * [Getting and Cleaning Data](03 Getting and Cleaning Data/README.md)
  * [Exploratory Data Analysis](04 Exploratory Data Analysis/README.md)
+ * [Reproducible Research](05 Reproducible Research/README.md)
 
 Some additional material I compiled:
 
