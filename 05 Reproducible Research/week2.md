@@ -23,7 +23,11 @@ Any blocks of the form
     
 Will be executed as R code; there are options to be added to `{r}` such 
 as chunk names, whether code or results are shown, and more.
-Code of the form `\`r var\`` can be used inline to use results in text.
+Code of the form 
+
+    `r var` 
+    
+can be used inline to use results in text.
 
 Package `knitr` converts R Markdown into markdown, 
 `markdown` converts markdown into HTML.
