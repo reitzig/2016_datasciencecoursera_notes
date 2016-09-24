@@ -172,6 +172,7 @@ distribution of the median of n observation.
  * The confidence interval as proposed above is not very good.
     Use the bias-corrected accelerated (BCA) variant instead.
     
+ * Package `bootstrap` contains helpful functions, e.g. for taking care of biases.
     
     
 ## Permutation testing
