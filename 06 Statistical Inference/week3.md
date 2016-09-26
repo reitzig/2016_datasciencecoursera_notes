@@ -126,7 +126,7 @@ transform to H_0 : µ_1 - µ_2 = 0 and apply the same mathematics.
 
 ### In R
 
-Functions `_.test`, e.g. `t.test()` perform these tests for us.
+Functions `_.test`, e.g. `t.test()` perform these tests for us. There is also `pairwise.t.test()`.
 
 
 ## P-values
